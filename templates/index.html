@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+<body>
+    {% block main %}
+    <div class="container">
+        <div class="card-deck mb-3 text-dark">
+              <div class="card mb-4 shadow-sm">
+                  <div class="card-header">
+                      <h4 class="my-0 font-weight-normal text-center">Website</h4>
+                  </div>
+                <div class="card-body">
+                    <form action="/shortlink" method="POST">
+                        <div>
+                            <label for="url">URL Website</label><br>
+                            <input class="form-control" type="url" name="url" id="url" value="" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="code">Shortname</label><br>
+                            <input class="form-control" type="text" name="code" id="code" value="" required>
+                        </div>
+                        <br>
+                        <div>
+                            <input class="btn btn-block btn-primary" type="submit" value="Shortlink!">
+                        </div>
+                    </form>
+                </div>
+              </div>
+        </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if codes %}
+                <h2>Codes you have created</h2>
+                <ul>
+                    {% for code in codes %}
+                        <a href="{{ url_for('redirect_to_url', code=code) }}" target="_blank"><li>{{ code }}</li></a>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

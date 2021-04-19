@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} URL PAGE "{{ code }}" {% endblock %}
+
+<body>
+    {% block main %}
+    <div class="jumbotron jumbotron-fluid text-dark">
+      <div class="container">
+        <h1 class="display-4">URL Page</h1>
+        <p class="lead" id="new_url" value="{{ url_for('redirect_to_url', code=code, _external=True) }}" readonly></p>
+          <p>
+              <button id="copy-btn" class="btn btn-primary my-2">Copy URL</button>
+          </p>
+      </div>
+    </div>
+    {% endblock %}
+
+    <script>
+        copyBtn = document.getElementById('copy-btn')
+        copyText = document.getElementById('new_url')
+        copyBtn.addEventListener('click', () => {
+            copyText.select()
+            document.execCommand('copy')
+        })
+    </script>
+</body>
+
+</html>
